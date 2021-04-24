@@ -13,6 +13,7 @@ export function Player() {
     currentEpisodeIndex,
     isPlaying,
     togglePlay,
+    setPlayingState,
   } = useContext(playerContext);
 
   useEffect(() => {
@@ -72,7 +73,15 @@ export function Player() {
           <span>00:00</span>
         </div>
 
-        {episode && <audio ref={audioRef} src={episode.url} autoPlay />}
+        {episode && (
+          <audio
+            ref={audioRef}
+            src={episode.url}
+            autoPlay
+            onPlay={() => setPlayingState(true)}
+            onPause={() => setPlayingState(false)}
+          />
+        )}
 
         <div className={s.buttons}>
           <button type="button" disabled={!episode}>

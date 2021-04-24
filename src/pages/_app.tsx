@@ -22,6 +22,10 @@ function MyApp({ Component, pageProps }) {
     setIsPlaying(!isPlaying);
   }
 
+  function setPlayingState(state: boolean) {
+    setIsPlaying(state);
+  }
+
   return (
     <playerContext.Provider
       value={{
@@ -30,6 +34,7 @@ function MyApp({ Component, pageProps }) {
         isPlaying,
         play,
         togglePlay,
+        setPlayingState,
       }}
     >
       <div className={s.wrapper}>
