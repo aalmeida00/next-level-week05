@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useContext } from 'react';
 import { playerContext } from '../../contexts/PlayerContext';
 import s from './styles.module.scss';
@@ -11,11 +12,26 @@ export function Player() {
     <div className={s.playerContainer}>
       <header>
         <img src="/playing.svg" alt="Tocando agora" />
-        <strong>Tocando agora {episode?.title}</strong>
+        <strong>Tocando agora</strong>
       </header>
-      <div className={s.emptyPlayer}>
-        <strong>Selecione um podcast para ouvir</strong>
-      </div>
+
+      {episode ? (
+        <div className={s.currentEpisode}>
+          <Image
+            width={592}
+            height={592}
+            src={episode.thumbnail}
+            objectFit="cover"
+          />
+          <strong>{episode.title}</strong>
+          <span>{episode.members}</span>
+        </div>
+      ) : (
+        <div className={s.emptyPlayer}>
+          <strong>Selecione um podcast para ouvir</strong>
+        </div>
+      )}
+
       <footer className={s.empty}>
         <div className={s.progress}>
           <span>00:00</span>
