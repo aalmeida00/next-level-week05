@@ -20,6 +20,8 @@ export function Player() {
     hasNext,
     hasPrev,
     toggleLoop,
+    toggleShuffle,
+    isShuffling,
   } = usePlayer();
 
   useEffect(() => {
@@ -91,7 +93,12 @@ export function Player() {
         )}
 
         <div className={s.buttons}>
-          <button type="button" disabled={!episode}>
+          <button
+            onClick={toggleShuffle}
+            className={isShuffling ? s.isActive : ''}
+            type="button"
+            disabled={!episode || episodeList.length === 1}
+          >
             <img src="/shuffle.svg" alt="Embaralhar" />
           </button>
           <button
