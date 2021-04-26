@@ -18,10 +18,18 @@ export function Player() {
     });
   }
 
-  function handleSeek(amount:number) {
-    audioRef.current.currentTime = amount
+  function handleSeek(amount: number) {
+    audioRef.current.currentTime = amount;
 
-    setProgress(amount)
+    setProgress(amount);
+  }
+
+  function handleEpisodeEnded() {
+    if (hasNext) {
+      playNext();
+    } else {
+      clearPlayerState();
+    }
   }
 
   const {
@@ -38,6 +46,7 @@ export function Player() {
     toggleLoop,
     toggleShuffle,
     isShuffling,
+    clearPlayerState,
   } = usePlayer();
 
   useEffect(() => {
@@ -106,6 +115,7 @@ export function Player() {
             src={episode.url}
             autoPlay
             loop={isLooping}
+            onEnded={handleEpisodeEnded}
             onPlay={() => setPlayingState(true)}
             onPause={() => setPlayingState(false)}
             onLoadedMetadata={setupProgressListener}
