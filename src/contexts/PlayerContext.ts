@@ -12,6 +12,8 @@ type PlayerContextData = {
   episodeList: Episode[];
   currentEpisodeIndex: number;
   isPlaying: boolean;
+  hasPrev: boolean;
+  hasNext: boolean;
   playList: (list: Episode[], index: number) => void;
   play: (episode: Episode) => void;
   setPlayingState: (state: boolean) => void;
